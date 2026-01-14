@@ -1,10 +1,10 @@
 import Link from "next/link";
 import css from "./SidebarNotes.module.css";
-import { NoteTag } from "@/types/note";
-
-const tags: NoteTag[] = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
+import { getTags } from "@/lib/api";
 
 export default async function SidebarNotes() {
+  const tags = getTags();
+
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>

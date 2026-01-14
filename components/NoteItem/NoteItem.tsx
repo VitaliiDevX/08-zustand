@@ -25,26 +25,30 @@ function NoteItem({ note }: NoteItemProps) {
     },
   });
 
-  const handleDeleteNote = (id: string) => {
+  const handleDeleteNote = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
     deleteNoteMutation.mutate(id);
   };
 
   return (
-    <>
+    <Link href={`/notes/${note.id}`} className={css.card}>
       <h2 className={css.title}>{note.title}</h2>
       <p className={css.content}>{note.content}</p>
       <div className={css.footer}>
         <span className={css.tag}>{note.tag}</span>
-        <Link href={`/notes/${note.id}`}>View details</Link>
         <button
           className={css.button}
-          onClick={() => handleDeleteNote(note.id)}
+          onClick={(e) => handleDeleteNote(e, note.id)}
           disabled={deleteNoteMutation.isPending}
         >
           {deleteNoteMutation.isPending ? "Deleting..." : "Delete"}
         </button>
       </div>
-    </>
+    </Link>
   );
 }
 

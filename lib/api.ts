@@ -53,3 +53,7 @@ export const deleteNote = async (id: string): Promise<Note> => {
 
   return data;
 };
+
+export const getTags = (): NoteTag[] => {
+  return ["Todo", "Work", "Personal", "Meeting", "Shopping"];
+};
